@@ -1,0 +1,53 @@
+<!-- Adding interactivity with state -->
+
+<html>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel script -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/jsx">
+      const app = document.getElementById('app');
+     
+      function Header({title}) {
+        return (<h1>{title}</h1>);
+      }
+
+      // Iterating through lists
+      function HomePage() {
+
+        // State storing with useState Hook from react.
+        // This returns and array which can be accessed using array destructuring
+        // First item is the name of the state value
+        // Second item is the name of the update function
+        const [likes, setLikes] = React.useState(0);
+
+        const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+
+        // This function can be called inside  any event listener
+        function handleClick() {
+          // Using updater function to update the state of the likes
+          setLikes(likes + 1);
+          console.log("increment like count");
+        }
+
+        return (
+          <div>
+            <Header title="Develop. Preview. Ship." />
+            <ul>
+              {names.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+            { /* Calling handleClick inside onClick event listener*/}
+            <button onClick={handleClick}>Like({likes})</button>
+          </div>
+        )
+      }
+
+      const root = ReactDOM.createRoot(app);
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
