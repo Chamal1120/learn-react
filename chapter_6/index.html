@@ -1,0 +1,66 @@
+<!-- Displaying data with props -->
+
+<html>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel script -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/jsx">
+      const app = document.getElementById('app');
+     
+      // Passing props by destructering
+      function Header({title}) {
+        console.log(title); // { React }
+        return (<h1>{title}</h1>);
+      }
+
+      // Passing props without destructering
+      function Header2(props) {
+        console.log(props); // { title: "react" }
+        return (<h1>{props.title}</h1>);
+      }
+
+      // Using template literals
+      function Header3({title}) {
+        return (<h1>{`Cool ${title}.`}</h1>);
+      }
+
+      // Returned value of a function
+      function createTitle(title) {
+        if (title) {
+          return title;
+        } else {
+          return 'Default title';
+        }
+      }
+
+      function Header4({title}) {
+        return (<h1>{createTitle(title)}</h1>);
+      }
+
+      // Ternary operator
+      function Header5({ title }) {
+        return <h1>{title ? title : 'Default title'}</h1>;
+      }
+
+      function HomePage() {
+        return (
+          <div>
+            <Header title="React" />
+            <Header2 title="Next.js" />
+            <Header3 title="Technology" />
+            <Header4/>
+            <Header4 title=""/>
+            <Header4 title="custom title to the function"/>
+            <Header5/>
+          </div>
+        )
+      }
+
+      const root = ReactDOM.createRoot(app);
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
